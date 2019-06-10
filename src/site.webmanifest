@@ -1,0 +1,31 @@
+{
+    "short_name": "Fuel Calc",
+    "name": "Fuel Calculator",
+    "icons": [
+        {
+            "src": "images/app-icon-128.png",
+            "type": "image/png",
+            "sizes": "128x128"
+        },
+        {
+            "src": "images/app-icon-192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "images/app-icon-256.png",
+            "type": "image/png",
+            "sizes": "256x256"
+        },
+        {
+            "src": "images/app-icon-512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": "/",
+    "background_color": "#710000",
+    "theme_color": "#710000",
+    "display": "fullscreen",
+    "orientation": "portrait"
+}

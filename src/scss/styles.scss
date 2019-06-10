@@ -1,0 +1,158 @@
+@import "./../../node_modules/modern-normalize/modern-normalize.css";
+
+body {
+  background: #191919;
+  color: #fff;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;
+  text-transform: uppercase;
+}
+
+#container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#fc {
+  border: 1px solid #0c0c0c;
+  background: #252525;
+  box-shadow: 0px 0px 13px 0px #0e0e0e;
+  text-align: center;
+}
+
+.header {
+  background: #1f1f1f;
+  color: #fff;
+  background: #1f1f1f;
+  color: #fff;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  align-items: center;
+
+  button {
+    padding: 0.3rem 0;
+  }
+
+  svg {
+    fill: #fff;
+    width: 32px;
+  }
+}
+
+.hl {
+  display: block;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  padding: 0.25rem 0;
+  border: 1px solid #190000;
+  background: #710000;
+  border-left: none;
+  border-right: none;
+  color: #fff;
+  margin-bottom: 1rem;
+}
+
+form > div {
+  margin: 0 0 1rem 0;
+}
+
+input[type="number"] {
+  font-size: 2rem;
+  text-align: center;
+  background: #212121;
+  color: #fff;
+  min-width: 85px;
+  margin: 0 1rem;
+  border: 2px solid #540000;
+  border-bottom: 3px solid #790000;
+  border-radius: 0 0 3px 3px;
+
+  &.wide {
+    min-width: 120px;
+  }
+}
+
+button {
+  font-size: 1.1rem;
+  padding: 0.5rem;
+  width: 100%;
+  cursor: pointer;
+  color: #fff;
+  background: #861616;
+  border: 1px solid #b10000;
+  border-bottom: 3px solid #5d0000;
+  border-radius: 0 0 3px 3px;
+  border-right: 0;
+  border-left: 0;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 0px #000;
+
+  &:hover {
+    background: #940000;
+  }
+
+  &.voice {
+    background: #131313;
+    border: 1px solid #000;
+    border-bottom: 3px solid #000;
+
+    &.active {
+      border-bottom: 3px solid #5d0000;
+    }
+  }
+}
+
+.results {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  border-top: 2px solid #101010;
+  background: #1b1b1b;
+}
+
+.result {
+  padding: 1rem 0.5rem;
+  text-align: center;
+  text-shadow: 2px 2px 0 black;
+}
+
+.result .value {
+  color: #00ca00;
+  font-size: 2.5rem;
+  padding: 0.5rem 0;
+  text-transform: none;
+}
+
+.result span {
+  color: #4c4c4c;
+}
+
+.invalid {
+  color: #999 !important;
+}
+
+.active {
+  animation-name: pulse;
+  animation-duration: 1.5s;
+  animation-iteration-count: infinite;
+}
+
+.colon:after {
+  content: ":";
+  color: #fff;
+  font-size: 2rem;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #710000;
+  }
+  50% {
+    background-color: #9e0000;
+  }
+  100% {
+    background-color: #710000;
+  }
+}
