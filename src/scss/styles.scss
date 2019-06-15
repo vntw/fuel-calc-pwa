@@ -1,4 +1,4 @@
-@import "./../../node_modules/modern-normalize/modern-normalize.css";
+@import './../../node_modules/modern-normalize/modern-normalize.css';
 
 body {
   background: #191919;
@@ -58,7 +58,7 @@ form > div {
   margin: 0 0 1rem 0;
 }
 
-input[type="number"] {
+input[type='number'] {
   font-size: 2rem;
   text-align: center;
   background: #212121;
@@ -140,7 +140,7 @@ button {
 }
 
 .colon:after {
-  content: ":";
+  content: ':';
   color: #fff;
   font-size: 2rem;
 }
