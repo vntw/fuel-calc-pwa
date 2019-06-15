@@ -15,10 +15,12 @@ export function calc(lapMins, lapSecs, raceMins, raceSecs, fuelPerLap) {
   const lapSeconds = lapMins * 60 + lapSecs;
   const raceSeconds = raceMins * 60 + raceSecs;
   const laps = raceSeconds / lapSeconds;
-  const risky = laps * fuelPerLap;
+
+  const exact = laps * fuelPerLap;
+  const risky = (laps + 1) * fuelPerLap;
   const safe = (laps + 3) * fuelPerLap;
 
-  return { risky, safe };
+  return { exact, risky, safe };
 }
 
 export function formatLiters(l) {
