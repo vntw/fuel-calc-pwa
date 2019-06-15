@@ -1,0 +1,17 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:10-jdk-node-browsers
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-{{ arch }}-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - run: yarn --frozen-lockfile
+      - save_cache:
+          key: v1-{{ arch }}-{{ .Branch }}-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run: yarn eslint:check
+      - run: yarn prettier:check
