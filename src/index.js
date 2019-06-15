@@ -112,8 +112,17 @@ numbers.forEach(nr => {
     e.target.select();
   });
   nr.addEventListener('change', e => {
-    if (e.target.name.indexOf('sec') !== -1) {
-      e.target.value = padZero(e.target.value);
+    const val = parseInt(e.target.value, 10);
+    const isSecondInput = e.target.name.indexOf('sec') !== -1;
+
+    if (
+      isNaN(val) ||
+      (!isSecondInput && val < 0) ||
+      (isSecondInput && (val < 0 || val > 59))
+    ) {
+      e.target.value = isSecondInput ? '00' : '1';
+    } else if (isSecondInput) {
+      e.target.value = padZero(val);
     }
 
     submit();
