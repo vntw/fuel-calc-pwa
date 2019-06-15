@@ -29,6 +29,7 @@ const raceMinsInput = document.querySelector('input[name=racemin]');
 const raceSecsInput = document.querySelector('input[name=racesec]');
 const lapMinsInput = document.querySelector('input[name=min]');
 const lapSecsInput = document.querySelector('input[name=sec]');
+const resultExact = document.querySelector('.result.exact .value');
 const resultRisky = document.querySelector('.result.risky .value');
 const resultSafe = document.querySelector('.result.safe .value');
 
@@ -132,6 +133,8 @@ form.addEventListener('submit', e => {
   const liters = calc(lapMins, lapSecs, raceMins, raceSecs, fuelPerLap);
 
   if (liters === null) {
+    resultExact.classList.add('invalid');
+    resultExact.innerHTML = '-';
     resultRisky.classList.add('invalid');
     resultRisky.innerHTML = '-';
     resultSafe.classList.add('invalid');
@@ -141,9 +144,11 @@ form.addEventListener('submit', e => {
   }
 
   const formattedSafeLiters = formatLiters(liters.safe);
+  resultExact.innerHTML = `${formatLiters(liters.exact)} <span>l</span>`;
   resultRisky.innerHTML = `${formatLiters(liters.risky)} <span>l</span>`;
   resultSafe.innerHTML = `${formattedSafeLiters} <span>l</span>`;
 
+  resultExact.classList.remove('invalid');
   resultRisky.classList.remove('invalid');
   resultSafe.classList.remove('invalid');
 
