@@ -1,10 +1,19 @@
-import offlineRuntime from "offline-plugin/runtime";
-import { evaluate } from "./js/voice";
-import { calc, formatLiters } from "./js/fuel";
-import { padZero } from "./js/util";
-import "./scss/styles.scss";
+import offlineRuntime from 'offline-plugin/runtime';
+import { evaluate } from './js/voice';
+import { calc, formatLiters } from './js/fuel';
+import { padZero } from './js/util';
+import './scss/styles.scss';
 
-offlineRuntime.install();
+offlineRuntime.install({
+  onUpdateReady() {
+    offlineRuntime.applyUpdate();
+  },
+  onUpdated() {
+    if (confirm('Update ready, reload now?')) {
+      location.reload();
+    }
+  },
+});
 
 let speechActive = false;
 let recognizer = null;
