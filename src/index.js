@@ -1,10 +1,19 @@
-import offlineRuntime from "offline-plugin/runtime";
-import { evaluate } from "./js/voice";
-import { calc, formatLiters } from "./js/fuel";
-import { padZero } from "./js/util";
-import "./scss/styles.scss";
+import offlineRuntime from 'offline-plugin/runtime';
+import { evaluate } from './js/voice';
+import { calc, formatLiters } from './js/fuel';
+import { padZero } from './js/util';
+import './scss/styles.scss';
 
-offlineRuntime.install();
+offlineRuntime.install({
+  onUpdateReady() {
+    offlineRuntime.applyUpdate();
+  },
+  onUpdated() {
+    if (confirm('Update ready, reload now?')) {
+      location.reload();
+    }
+  },
+});
 
 let speechActive = false;
 let recognizer = null;
@@ -12,20 +21,20 @@ const speechSynth = window.speechSynthesis || null;
 const speechRec =
   window.SpeechRecognition || window.webkitSpeechRecognition || null;
 
-const form = document.querySelector("form");
-const numbers = document.querySelectorAll("input[type=number]");
-const speechRecBtn = document.querySelector("#sr");
-const fuelPerLapInput = document.querySelector("input[name=fpl]");
-const raceMinsInput = document.querySelector("input[name=racemin]");
-const raceSecsInput = document.querySelector("input[name=racesec]");
-const lapMinsInput = document.querySelector("input[name=min]");
-const lapSecsInput = document.querySelector("input[name=sec]");
-const resultRisky = document.querySelector(".result.risky .value");
-const resultSafe = document.querySelector(".result.safe .value");
+const form = document.querySelector('form');
+const numbers = document.querySelectorAll('input[type=number]');
+const speechRecBtn = document.querySelector('#sr');
+const fuelPerLapInput = document.querySelector('input[name=fpl]');
+const raceMinsInput = document.querySelector('input[name=racemin]');
+const raceSecsInput = document.querySelector('input[name=racesec]');
+const lapMinsInput = document.querySelector('input[name=min]');
+const lapSecsInput = document.querySelector('input[name=sec]');
+const resultRisky = document.querySelector('.result.risky .value');
+const resultSafe = document.querySelector('.result.safe .value');
 
-const storageKey = "vals";
+const storageKey = 'vals';
 let storageSupported = false;
-const test = "_";
+const test = '_';
 try {
   localStorage.setItem(test, test);
   localStorage.removeItem(test);
@@ -33,7 +42,7 @@ try {
 } catch (e) {}
 
 function submit() {
-  setTimeout(() => form.dispatchEvent(new Event("submit")), 50);
+  setTimeout(() => form.dispatchEvent(new Event('submit')), 50);
 }
 
 function save() {
@@ -46,7 +55,7 @@ function save() {
     sec: lapSecsInput.value,
     rmin: raceMinsInput.value,
     rsec: raceSecsInput.value,
-    fpl: fuelPerLapInput.value
+    fpl: fuelPerLapInput.value,
   };
 
   localStorage.setItem(storageKey, JSON.stringify(settings));
@@ -79,28 +88,30 @@ function load() {
 function startSpeech() {
   try {
     recognizer.start();
-    speechActive = true;
-    speechRecBtn.classList.add("active");
   } catch (e) {
-    console.log(e);
+    alert(`Could not start voice recognition: ${e}`);
+    return;
   }
+
+  speechActive = true;
+  speechRecBtn.classList.add('active');
 }
 
 function stopSpeech() {
   speechActive = false;
   recognizer.stop();
-  speechRecBtn.classList.remove("active");
+  speechRecBtn.classList.remove('active');
 }
 
 load();
 submit();
 
 numbers.forEach(nr => {
-  nr.addEventListener("focus", e => {
+  nr.addEventListener('focus', e => {
     e.target.select();
   });
-  nr.addEventListener("change", e => {
-    if (e.target.name.indexOf("sec") !== -1) {
+  nr.addEventListener('change', e => {
+    if (e.target.name.indexOf('sec') !== -1) {
       e.target.value = padZero(e.target.value);
     }
 
@@ -109,7 +120,7 @@ numbers.forEach(nr => {
   });
 });
 
-form.addEventListener("submit", e => {
+form.addEventListener('submit', e => {
   e.preventDefault();
 
   const lapMins = parseInt(lapMinsInput.value, 10);
@@ -121,10 +132,10 @@ form.addEventListener("submit", e => {
   const liters = calc(lapMins, lapSecs, raceMins, raceSecs, fuelPerLap);
 
   if (liters === null) {
-    resultRisky.classList.add("invalid");
-    resultRisky.innerHTML = "-";
-    resultSafe.classList.add("invalid");
-    resultSafe.innerHTML = "-";
+    resultRisky.classList.add('invalid');
+    resultRisky.innerHTML = '-';
+    resultSafe.classList.add('invalid');
+    resultSafe.innerHTML = '-';
 
     return;
   }
@@ -133,8 +144,8 @@ form.addEventListener("submit", e => {
   resultRisky.innerHTML = `${formatLiters(liters.risky)} <span>l</span>`;
   resultSafe.innerHTML = `${formattedSafeLiters} <span>l</span>`;
 
-  resultRisky.classList.remove("invalid");
-  resultSafe.classList.remove("invalid");
+  resultRisky.classList.remove('invalid');
+  resultSafe.classList.remove('invalid');
 
   if (speechSynth && speechActive) {
     const utterance = new SpeechSynthesisUtterance(
@@ -142,16 +153,16 @@ form.addEventListener("submit", e => {
     );
     // pause recognition so it won't pick up the spoken result
     recognizer.stop();
-    utterance.addEventListener("end", () => recognizer.start());
+    utterance.addEventListener('end', () => recognizer.start());
     speechSynth.speak(utterance);
   }
 });
 
-speechRecBtn.addEventListener("click", e => {
+speechRecBtn.addEventListener('click', e => {
   e.preventDefault();
 
   if (!recognizer) {
-    alert("Speech recognition not suppo33rted");
+    alert('Speech recognition not supported');
     return;
   }
 
@@ -160,7 +171,7 @@ speechRecBtn.addEventListener("click", e => {
 
 if (speechRec) {
   recognizer = new speechRec();
-  recognizer.lang = "en-US";
+  recognizer.lang = 'en-US';
   recognizer.continuous = true;
   recognizer.onresult = e => {
     const res = evaluate(e);
@@ -190,8 +201,8 @@ if (speechRec) {
     save();
   };
   recognizer.onerror = e => {
-    if (e.error === "not-allowed") {
-      alert("Microphone blocked for this site");
+    if (e.error === 'not-allowed') {
+      alert('Microphone blocked for this site');
     }
     stopSpeech();
   };

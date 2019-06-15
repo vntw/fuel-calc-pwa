@@ -9,7 +9,7 @@ export function evaluate(e) {
   let hasMatch = false;
   const results = {};
 
-  let transcription = "";
+  let transcription = '';
   for (let i = e.resultIndex; i < e.results.length; i++) {
     for (let j = 0; j < e.results[i].length; j++) {
       transcription = e.results[i][j].transcript;
