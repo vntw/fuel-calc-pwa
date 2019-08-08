@@ -1,67 +1,67 @@
 <!DOCTYPE html>
 <html lang="en-US">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Calculate the necessary fuel for a race.">
-        <meta name="theme-color" content="#710000">
-        <meta name="apple-mobile-web-app-capable" content="yes">
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="Calculate the necessary fuel for a race.">
+      <meta name="theme-color" content="#710000">
+      <meta name="apple-mobile-web-app-capable" content="yes">
 
-        <title>Fuel Calculator</title>
+      <title>Fuel Calculator</title>
 
-        <link rel="manifest" href="site.webmanifest">
-        <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-        <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-        <link rel="apple-touch-startup-image" href="images/splash/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" />
-        <link rel="apple-touch-startup-image" href="images/splash/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" />
-        <link rel="apple-touch-startup-image" href="images/splash/iphoneplus_splash.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" />
-        <link rel="apple-touch-startup-image" href="images/splash/iphonex_splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" />
-        <link rel="apple-touch-startup-image" href="images/splash/iphonexr_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" />
-        <link rel="apple-touch-startup-image" href="images/splash/iphonexsmax_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" />
-        <link rel="apple-touch-startup-image" href="images/splash/ipad_splash.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" />
-        <link rel="apple-touch-startup-image" href="images/splash/ipadpro1_splash.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" />
-        <link rel="apple-touch-startup-image" href="images/splash/ipadpro3_splash.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)" />
-        <link rel="apple-touch-startup-image" href="images/splash/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" />
-    </head>
-    <body>
-        <div id="container">
-            <div id="fc">
-                <div class="header">
-                    <button id="sr" class="voice">
-                        <img inline src="src/images/voice.svg">
-                    </button>
-                    Fuel Calculator
-                </div>
-                <form action="">
-                    <div>
-                        <label for="i1" class="hl">Laptime</label>
-                        <input id="i1" type="number" pattern="\d*" name="min" step="1" min="0" max="10" value="1" /><span class="colon"></span><input type="number" pattern="\d*" name="sec" step="1" min="0" max="59" value="30" />
-                    </div>
-                    <div>
-                        <label for="i2" class="hl">Race Minutes</label>
-                        <input id="i2" type="number" pattern="\d*" name="racemin" step="1" min="0" max="999" value="15" /><span class="colon"></span><input type="number" pattern="\d*" name="racesec" min="0" max="59" step="1" value="00" />
-                    </div>
-                    <div>
-                        <label for="i3" class="hl">Fuel Per Lap</label>
-                        <input id="i3" class="wide" type="number" inputmode="decimal" name="fpl" step="0.1" min="0" max="99" value="2.5" />
-                    </div>
-                </form>
-
-                <div class="results">
-                    <div class="result exact">
-                        <b>Exact</b>
-                        <div class="value"></div>
-                    </div>
-                    <div class="result risky">
-                        <b>Risky (+1L)</b>
-                        <div class="value"></div>
-                    </div>
-                    <div class="result safe">
-                        <b>Safe (+3L)</b>
-                        <div class="value"></div>
-                    </div>
-                </div>
-            </div>
+      <link rel="manifest" href="site.webmanifest">
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+      <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+      <link rel="apple-touch-startup-image" href="images/splash/iphone5_splash.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" />
+      <link rel="apple-touch-startup-image" href="images/splash/iphone6_splash.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" />
+      <link rel="apple-touch-startup-image" href="images/splash/iphoneplus_splash.png" media="(device-width: 621px) and (device-height: 1104px) and (-webkit-device-pixel-ratio: 3)" />
+      <link rel="apple-touch-startup-image" href="images/splash/iphonex_splash.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" />
+      <link rel="apple-touch-startup-image" href="images/splash/iphonexr_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" />
+      <link rel="apple-touch-startup-image" href="images/splash/iphonexsmax_splash.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" />
+      <link rel="apple-touch-startup-image" href="images/splash/ipad_splash.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" />
+      <link rel="apple-touch-startup-image" href="images/splash/ipadpro1_splash.png" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2)" />
+      <link rel="apple-touch-startup-image" href="images/splash/ipadpro3_splash.png" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2)" />
+      <link rel="apple-touch-startup-image" href="images/splash/ipadpro2_splash.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" />
+  </head>
+  <body>
+    <div id="container">
+      <div id="fc">
+        <div class="header">
+          <button id="sr" class="voice">
+            <img inline src="src/images/voice.svg">
+          </button>
+          Fuel Calculator
         </div>
-    </body>
+        <form action="">
+          <div>
+            <label for="i1" class="hl">Laptime</label>
+            <input id="i1" type="number" pattern="\d*" name="min" step="1" min="0" max="10" value="1" /><span class="colon"></span><input type="number" pattern="\d*" name="sec" step="1" min="0" max="59" value="30" />
+          </div>
+          <div>
+            <label for="i2" class="hl">Race Minutes</label>
+            <input id="i2" type="number" pattern="\d*" name="racemin" step="1" min="0" max="999" value="15" /><span class="colon"></span><input type="number" pattern="\d*" name="racesec" min="0" max="59" step="1" value="00" />
+          </div>
+          <div>
+            <label for="i3" class="hl">Fuel Per Lap</label>
+            <input id="i3" class="wide" type="number" inputmode="decimal" name="fpl" step="0.1" min="0" max="99" value="2.5" />
+          </div>
+        </form>
+
+        <div class="results">
+          <div class="result exact">
+            <b>Exact</b>
+            <div class="value"></div>
+          </div>
+          <div class="result risky">
+            <b>Risky (+1L)</b>
+            <div class="value"></div>
+          </div>
+          <div class="result safe">
+            <b>Safe (+3L)</b>
+            <div class="value"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
