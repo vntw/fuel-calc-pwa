@@ -1,4 +1,4 @@
-<center><img src="https://raw.githubusercontent.com/venyii/fuel-calc-pwa/master/.github/app.png"></center>
+<p align="center"><img src="https://raw.githubusercontent.com/venyii/fuel-calc-pwa/master/.github/app.png"></p>
 
 ## Fuel Calculator Progressive Web App
 
