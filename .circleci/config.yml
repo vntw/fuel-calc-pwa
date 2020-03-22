@@ -2,7 +2,7 @@ version: 2.1
 jobs:
   build:
     docker:
-      - image: circleci/openjdk:10-jdk-node-browsers
+      - image: circleci/node:10
     steps:
       - checkout
       - restore_cache:
@@ -14,4 +14,4 @@ jobs:
           paths:
             - ~/.cache/yarn
       - run: yarn eslint:check
-      - run: yarn prettier:check
+      - run: yarn dist:build

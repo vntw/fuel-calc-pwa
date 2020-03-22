@@ -43,7 +43,10 @@ try {
 } catch (e) {}
 
 function submit() {
-  setTimeout(() => form.dispatchEvent(new Event('submit')), 50);
+  setTimeout(
+    () => form.dispatchEvent(new Event('submit', { cancelable: true })),
+    50
+  );
 }
 
 function save() {
