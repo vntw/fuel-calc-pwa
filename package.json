@@ -37,7 +37,7 @@
     "dist:build": "webpack -p --bail",
     "dist:serve": "static dist/",
     "dist:open": "yarn dist:build && yarn dist:serve",
-    "deploy": "yarn dist:build && now"
+    "deploy": "yarn dist:build && now --prod"
   },
   "browserslist": [
     "defaults"
