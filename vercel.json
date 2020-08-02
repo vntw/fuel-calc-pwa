@@ -3,7 +3,7 @@
   "builds": [
     {
       "src": "dist/**",
-      "use": "@now/static"
+      "use": "@vercel/static"
     }
   ],
   "routes": [
