@@ -4,7 +4,7 @@
 
 This is a small PWA that allows you to quickly calculate the necessary fuel for a given race. Currently it supports race length in minutes.
 
-**Demo**: [fuel-calc.ven.now.sh](https://fuel-calc.ven.now.sh)
+**Demo**: [fuel-calc-pwa.vercel.app](https://fuel-calc-pwa.vercel.app)
 
 If the browser supports the [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API) (speech recognition/synthesis), it's possible to tell the app what values to use and it will in return read the results back to you. This is especially useful when using a VR headset.
 

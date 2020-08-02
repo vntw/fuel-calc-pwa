@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
-const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const HtmlWebpackInlineSVGPlugin = require('html-webpack-inline-svg-plugin');
 
 module.exports = {
@@ -58,11 +57,12 @@ module.exports = {
       safeToUseOptionalCaches: true,
       updateStrategy: 'changed',
     }),
-    new CopyPlugin([
-      { from: 'src/favicon.ico', to: '' },
-      { from: 'src/site.webmanifest', to: '' },
-      { from: 'src/images', to: 'images' },
-    ]),
-    new ImageminPlugin({ test: /\.(jpe?g|png|gif|svg)$/i }),
+    new CopyPlugin({
+      patterns: [
+        { from: 'src/favicon.ico', to: '' },
+        { from: 'src/site.webmanifest', to: '' },
+        { from: 'src/images', to: 'images' },
+      ],
+    }),
   ],
 };

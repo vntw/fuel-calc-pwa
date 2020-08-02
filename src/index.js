@@ -110,11 +110,11 @@ function stopSpeech() {
 load();
 submit();
 
-numbers.forEach(nr => {
-  nr.addEventListener('focus', e => {
+numbers.forEach((nr) => {
+  nr.addEventListener('focus', (e) => {
     e.target.select();
   });
-  nr.addEventListener('change', e => {
+  nr.addEventListener('change', (e) => {
     const val = parseInt(e.target.value, 10);
     const isSecondInput = e.target.name.indexOf('sec') !== -1;
 
@@ -133,7 +133,7 @@ numbers.forEach(nr => {
   });
 });
 
-form.addEventListener('submit', e => {
+form.addEventListener('submit', (e) => {
   e.preventDefault();
 
   const lapMins = parseInt(lapMinsInput.value, 10);
@@ -175,7 +175,7 @@ form.addEventListener('submit', e => {
   }
 });
 
-speechRecBtn.addEventListener('click', e => {
+speechRecBtn.addEventListener('click', (e) => {
   e.preventDefault();
 
   if (!recognizer) {
@@ -190,7 +190,7 @@ if (speechRec) {
   recognizer = new speechRec();
   recognizer.lang = 'en-US';
   recognizer.continuous = true;
-  recognizer.onresult = e => {
+  recognizer.onresult = (e) => {
     const res = evaluate(e);
 
     if (!res.hasMatch) {
@@ -217,7 +217,7 @@ if (speechRec) {
     submit();
     save();
   };
-  recognizer.onerror = e => {
+  recognizer.onerror = (e) => {
     if (e.error === 'not-allowed') {
       alert('Microphone blocked for this site');
     }
