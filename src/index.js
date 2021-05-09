@@ -1,4 +1,4 @@
-import offlineRuntime from 'offline-plugin/runtime';
+import offlineRuntime from '@lcdp/offline-plugin/runtime';
 import { evaluate } from './js/voice';
 import { calc, formatLiters } from './js/fuel';
 import { padZero } from './js/util';
