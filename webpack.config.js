@@ -1,7 +1,6 @@
 const path = require('path');
-const OfflinePlugin = require('offline-plugin');
+const OfflinePlugin = require('@lcdp/offline-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const HtmlWebpackInlineSVGPlugin = require('html-webpack-inline-svg-plugin');
@@ -15,6 +14,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name]-[chunkhash].js',
     chunkFilename: '[chunkhash].js',
+    clean: true,
   },
   module: {
     rules: [
@@ -34,7 +34,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'src/index.ejs',

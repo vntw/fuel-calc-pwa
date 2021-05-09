@@ -6,8 +6,7 @@ const rxfpl = /(\d+)\s{0,}(liters?|litres?|L)|fuel( per)?( lap)? (\d+)/i;
  * speech rec grammar isn't working in Chrome currently (https://bugs.chromium.org/p/chromium/issues/detail_ezt?id=799849)
  */
 export function evaluate(e) {
-  let hasMatch = false;
-  const results = {};
+  const results = { hasMatch: false };
 
   let transcription = '';
   for (let i = e.resultIndex; i < e.results.length; i++) {
@@ -22,7 +21,7 @@ export function evaluate(e) {
 
     if (!isNaN(rxmin)) {
       results.lapMins = rxmin;
-      hasMatch = true;
+      results.hasMatch = true;
 
       if (rxlm[4]) {
         const rxsec = parseInt(rxlm[4], 10);
@@ -39,7 +38,7 @@ export function evaluate(e) {
 
     if (!isNaN(rxrmmin)) {
       results.raceMins = rxrmmin;
-      hasMatch = true;
+      results.hasMatch = true;
 
       if (rxrmm[4]) {
         const rxrmsec = parseInt(rxrmm[4], 10);
@@ -56,17 +55,15 @@ export function evaluate(e) {
 
     if (!isNaN(rxfpl)) {
       results.fuelPerLap = rxfpl;
-      hasMatch = true;
+      results.hasMatch = true;
     }
   }
 
   const rxWut = /^\s{0,}(what|how much|repeat)\s{0,}$/i;
   if (rxWut.test(transcription)) {
     results.repeat = true;
-    hasMatch = true;
+    results.hasMatch = true;
   }
-
-  results.hasMatch = hasMatch;
 
   return results;
 }
