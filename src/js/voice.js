@@ -1,4 +1,5 @@
-const rxlap = /(lap|time|lap time) (\d{1,}) minutes?(\s{0,}(\d{1,})( seconds?)?)?/i;
+const rxlap =
+  /(lap|time|lap time) (\d{1,}) minutes?(\s{0,}(\d{1,})( seconds?)?)?/i;
 const rxrm = /race (minutes )?(\d{1,}) minutes?(\s{0,}(\d{1,})( seconds?)?)?/i;
 const rxfpl = /(\d+)\s{0,}(liters?|litres?|L)|fuel( per)?( lap)? (\d+)/i;
 
