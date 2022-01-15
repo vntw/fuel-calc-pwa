@@ -8,7 +8,7 @@ type Props = {
 
 export function Box({ children, header = null, footer = null }: Props) {
   return (
-    <div class="flex flex-col border-t-3 border-t-[#00506f]">
+    <div class="flex flex-col border-t-3 border-t-red-900">
       {header && (
         <div class="px-4 py-2 font-bold text-2xl bg-black uppercase text-center">
           {header}

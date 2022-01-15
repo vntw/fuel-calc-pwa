@@ -3,15 +3,12 @@
 
 @layer components {
   .btn {
-    @apply inline-block text-center px-8 py-4 bg-[#006a93] rounded-xl font-bold;
-    @apply hover:bg-[#00506f];
-    @apply focus:outline focus:outline-offset-4 focus:outline-3 focus:outline-[#00506fa6];
+    @apply inline-block text-center px-8 py-4 bg-red-900 rounded-xl font-bold;
+    @apply hover:bg-red-800;
+    @apply focus:outline focus:outline-offset-4 focus:outline-3 focus:outline-red-900;
   }
   .btn-wide {
     @apply block w-full;
-  }
-  .btn-danger {
-    @apply bg-[#700] hover:bg-[#600] focus:outline-[#700];
   }
   .btn-small {
     @apply px-8 py-2;

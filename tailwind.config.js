@@ -7,6 +7,7 @@ module.exports = {
     },
     extend: {
       borderWidth: {
+        1: '1px',
         3: '3px',
       },
       outlineWidth: {

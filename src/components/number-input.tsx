@@ -95,16 +95,16 @@ export function NumberInput({
         name={name}
         class={`${
           isDecimal ? 'w-40' : 'w-32'
-        } px-4 py-2 text-4xl border-2 border-cyan-900 rounded-md bg-transparent`}
+        } px-4 py-2 text-4xl border-2 border-red-700 border-opacity-25 rounded-md bg-transparent`}
         value={value.display}
         onInput={onInput}
         onBlur={onBlur}
       />
       <div class="absolute right-[2px] top-0 grid grid-flow-row gap-[1px] py-[2px] bottom-0">
-        <button class="px-4 rounded-tr-sm bg-gray-800" onClick={onInc}>
+        <button class="px-4 rounded-tr-sm bg-red-900" onClick={onInc}>
           +
         </button>
-        <button class="px-4 rounded-br-sm bg-gray-800" onClick={onDec}>
+        <button class="px-4 rounded-br-sm bg-red-900" onClick={onDec}>
           -
         </button>
       </div>

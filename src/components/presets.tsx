@@ -42,7 +42,7 @@ export function Presets({ onPopulate }: Props) {
   const renderValue = (label: string, value: ComponentChildren) => (
     <div class="inline-flex flex-row bg-gray-700 rounded-md">
       <span class="px-2 py-1 uppercase">{label}</span>
-      <span class="bg-[#00506fa6] px-2 py-1 font-bold">{value}</span>
+      <span class="px-2 py-1 font-bold bg-red-900 bg-opacity-75">{value}</span>
     </div>
   );
 
@@ -52,7 +52,7 @@ export function Presets({ onPopulate }: Props) {
         <Box
           key={`preset-${i}`}
           footer={
-            <div class="grid grid-cols-2">
+            <div class="grid grid-cols-2 gap-x-[2px]">
               <button
                 class="btn btn-small rounded-none"
                 onClick={() => {
@@ -62,7 +62,7 @@ export function Presets({ onPopulate }: Props) {
                 Use
               </button>
               <button
-                class="btn btn-small btn-danger rounded-none"
+                class="btn btn-small rounded-none bg-opacity-50"
                 onClick={deletePreset(i)}
               >
                 ⤬
