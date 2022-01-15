@@ -1,46 +1,29 @@
 {
-  "name": "fuel-calc",
-  "version": "1.0.0",
+  "name": "fuel-calc-pwa",
   "license": "MIT",
+  "version": "2.0.0",
+  "dependencies": {
+    "preact": "^10.5.15"
+  },
   "devDependencies": {
-    "@lcdp/offline-plugin": "^5.1.0",
-    "autoprefixer": "^10.3.5",
-    "copy-webpack-plugin": "^9.0.1",
-    "css-loader": "^6.3.0",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "html-loader": "^2.1.2",
-    "html-webpack-inline-svg-plugin": "^2.2.6",
-    "html-webpack-plugin": "^5.3.2",
-    "mini-css-extract-plugin": "^2.3.0",
-    "modern-normalize": "^1.1.0",
-    "node-sass": "^6.0.1",
-    "node-static": "^0.7.11",
-    "postcss": "^8.3.8",
-    "postcss-loader": "^6.1.1",
-    "prettier": "2.4.1",
-    "sass-loader": "^12.1.0",
-    "script-ext-html-webpack-plugin": "^2.1.4",
-    "style-loader": "^3.3.0",
-    "webpack": "^5.54.0",
-    "webpack-cli": "^4.8.0",
-    "webpack-dev-server": "^4.3.0"
+    "@preact/preset-vite": "^2.1.5",
+    "@typescript-eslint/eslint-plugin": "^5.9.1",
+    "@typescript-eslint/parser": "^5.9.1",
+    "autoprefixer": "^10.4.2",
+    "eslint": "8.6.0",
+    "eslint-config-preact": "^1.1.3",
+    "postcss": "^8.4.5",
+    "prettier": "^2.5.1",
+    "tailwindcss": "^3.0.15",
+    "typescript": "^4.4.4",
+    "vite": "^2.7.12",
+    "vite-plugin-pwa": "^0.11.13"
   },
   "scripts": {
-    "start": "webpack-dev-server --port 8080",
-    "lint": "yarn eslint:check && yarn prettier:check",
-    "lint:fix": "yarn eslint:fix && yarn prettier:fix",
-    "eslint:check": "eslint src",
-    "eslint:fix": "yarn eslint:check --fix",
-    "prettier:check": "prettier --check '*.js' 'src/**/*.{js,scss}'",
-    "prettier:fix": "prettier --write '*.js' 'src/**/*.{js,scss}'",
-    "dist:build": "NODE_ENV=production webpack --bail",
-    "dist:serve": "static dist/",
-    "dist:open": "yarn dist:build && yarn dist:serve",
-    "deploy": "yarn dist:build && vercel --prod"
-  },
-  "browserslist": [
-    "defaults"
-  ]
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "prettier --ignore-path .gitignore --check . && eslint 'src/**/*.{js,jsx,ts,tsx,html}'",
+    "format": "prettier --ignore-path .gitignore --write . && eslint 'src/**/*.{js,jsx,ts,tsx,html}' --fix"
+  }
 }
