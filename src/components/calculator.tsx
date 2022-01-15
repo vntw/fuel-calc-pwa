@@ -207,7 +207,7 @@ export function Calculator({ showPresets, onPresetPopulate }: Props) {
         </div>
       </form>
 
-      <div class="w-full fixed bottom-0 left-0 py-4 flex flex-row space-x-32 bg-[#131313f0] border-t-2 border-t-[#00506f38] justify-center overflow-x-scroll overflow-y-hidden">
+      <div class="w-full fixed bottom-0 left-0 py-4 flex flex-row space-x-32 bg-[#131313f0] border-t-2 border-t-[#7e1e2038] justify-center overflow-x-scroll overflow-y-hidden">
         <div class="flex flex-row justify-center items-center space-x-4">
           <div class="font-bold text-5xl text-green-500 whitespace-nowrap">
             {formatLiters(fuelResult)}

@@ -12,7 +12,7 @@ export default defineConfig({
       manifest: {
         name: 'Fuel Calculator',
         short_name: 'Fuel Calculator',
-        theme_color: '#00506f',
+        theme_color: '#7e1e20',
         start_url: '/',
         display: 'fullscreen',
         orientation: 'portrait',
