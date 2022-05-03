@@ -82,6 +82,12 @@ export function NumberInput({
     handleValueChange((value.real - modifyBy).toFixed(isDecimal ? 2 : 0), true);
   };
 
+  const onKeyPress = (e: KeyboardEvent) => {
+    if (e.code === 'Enter') {
+      e.preventDefault();
+    }
+  };
+
   useEffect(() => {
     onChange(value.real, name);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -99,6 +105,7 @@ export function NumberInput({
         value={value.display}
         onInput={onInput}
         onBlur={onBlur}
+        onKeyPress={onKeyPress}
       />
       <div class="absolute right-[2px] top-0 grid grid-flow-row gap-[1px] py-[2px] bottom-0">
         <button class="px-4 rounded-tr-sm bg-red-900" onClick={onInc}>
