@@ -23,7 +23,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "prettier --ignore-path .gitignore --check . && eslint 'src/**/*.{js,jsx,ts,tsx,html}'",
+    "lint": "prettier --ignore-path .gitignore --check . && eslint 'src/**/*.{js,jsx,ts,tsx,html}' && tsc --noEmit",
     "format": "prettier --ignore-path .gitignore --write . && eslint 'src/**/*.{js,jsx,ts,tsx,html}' --fix"
   }
 }
