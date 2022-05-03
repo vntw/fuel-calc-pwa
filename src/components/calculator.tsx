@@ -89,7 +89,10 @@ export function Calculator({ showPresets, onPresetPopulate }: Props) {
       <form
         action=""
         class="grid grid-cols-1 md:grid-cols-2 gap-4"
-        onSubmit={(e) => e.preventDefault()}
+        onSubmit={(e) => {
+          e.preventDefault();
+          return false;
+        }}
       >
         <Box header="Lap Time">
           <label for="lapTimeMinutes" class="sr-only">
