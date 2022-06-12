@@ -83,7 +83,7 @@ export function NumberInput({
   };
 
   const onKeyPress = (e: KeyboardEvent) => {
-    if (e.code === 'Enter') {
+    if (!e.target || !e.key.match(/[\d+,.]/)) {
       e.preventDefault();
     }
   };
