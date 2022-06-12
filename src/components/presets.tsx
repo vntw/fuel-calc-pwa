@@ -4,6 +4,8 @@ import { formatLiters } from '../fuel';
 import { padZero } from '../util';
 import { ComponentChildren } from 'preact';
 import { Box } from './box';
+import trashIcon from './../assets/icons/trash.svg?raw';
+import { SvgIcon } from './svg-icon';
 
 type Props = {
   onPopulate: (values: FuelInputValues) => void;
@@ -25,7 +27,7 @@ export function Presets({ onPopulate }: Props) {
 
     const newPresets = [...presets.slice(0, idx), ...presets.slice(idx + 1)];
 
-    save('fc-input-presets', newPresets);
+    save(KEY_PRESETS, newPresets);
     setPresets(newPresets);
   };
 
@@ -65,7 +67,10 @@ export function Presets({ onPopulate }: Props) {
                 class="btn btn-small bg-opacity-50 flex items-center justify-center rounded-none"
                 onClick={deletePreset(i)}
               >
-                ⤬
+                <SvgIcon
+                  raw={trashIcon}
+                  className="h-6 w-6 fill-current text-white"
+                />
               </button>
             </div>
           }
@@ -80,17 +85,20 @@ export function Presets({ onPopulate }: Props) {
                 'Race',
                 `${iv.raceMinutes}:${padZero(iv.raceSeconds)}`,
               )}
-              {renderValue('Fuel/Lap', `${iv.fuelPerLap}`)}
               {renderValue(
-                'Formation',
-                `${iv.formationLap === 0.5 ? '½' : iv.formationLap}`,
+                'Extra Fuel',
+                <>
+                  {formatLiters(iv.extraFuel, true)}
+                  <span class="pl-0.5 text-base font-normal text-gray-400">
+                    l
+                  </span>
+                </>,
               )}
-              {renderValue('Post Race', `${iv.postRaceLap}`)}
               {renderValue(
                 'Result',
                 <>
-                  {formatLiters(_meta.fuelResult)}{' '}
-                  <span class="font-normal text-base text-gray-400">
+                  {formatLiters(_meta.fuelResult)}
+                  <span class="pl-0.5 text-base font-normal text-gray-400">
                     l ({formatLiters(_meta.fuelResult, true)})
                   </span>
                 </>,

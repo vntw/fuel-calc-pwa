@@ -4,6 +4,7 @@ import { calc, formatLiters } from '../fuel';
 import { NumberInput } from './number-input';
 import { Presets } from './presets';
 import { Box } from './box';
+import { RangeInput } from './range-input';
 
 type Props = {
   showPresets: boolean;
@@ -19,8 +20,13 @@ export function Calculator({ showPresets, onPresetPopulate }: Props) {
     raceMinutes: 30,
     raceSeconds: 0,
     fuelPerLap: 3.5,
-    formationLap: 0,
-    postRaceLap: 0,
+    extraFuel: 0,
+  });
+
+  const [extraFuelRangeOptions, setExtraFuelRangeOptions] = useState({
+    step: 0.25,
+    min: 0,
+    max: 10,
   });
 
   useEffect(() => {
@@ -37,8 +43,14 @@ export function Calculator({ showPresets, onPresetPopulate }: Props) {
     if (!loaded) {
       return;
     }
+
     setFuelResult(calc(inputValues));
     save(KEY_CURRENT_VALUES, inputValues);
+
+    setExtraFuelRangeOptions({
+      ...extraFuelRangeOptions,
+      max: Math.max(5, Math.ceil(inputValues.fuelPerLap * 4)),
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValues]);
 
@@ -46,27 +58,19 @@ export function Calculator({ showPresets, onPresetPopulate }: Props) {
     setInputValues({ ...inputValues, [name]: value });
   };
 
-  const onRadioInput = ({
-    currentTarget,
-  }: JSX.TargetedEvent<HTMLInputElement, Event>) => {
-    setInputValues({
-      ...inputValues,
-      [currentTarget.name]: parseFloat(currentTarget.value),
-    });
-  };
-
   const saveAsPreset = () => {
     const currentPresets = load(KEY_PRESETS);
-    const newPresets = Array.isArray(currentPresets) ? currentPresets : [];
-    newPresets.push({
-      inputValues,
-      _meta: {
-        createdAt: new Date().toDateString(),
-        fuelResult,
-      },
-    });
 
-    save(KEY_PRESETS, newPresets);
+    save(KEY_PRESETS, [
+      {
+        inputValues,
+        _meta: {
+          createdAt: new Date().toISOString(),
+          fuelResult,
+        },
+      },
+      ...(Array.isArray(currentPresets) ? currentPresets : []),
+    ]);
   };
 
   if (!loaded) {
@@ -85,10 +89,10 @@ export function Calculator({ showPresets, onPresetPopulate }: Props) {
   }
 
   return (
-    <main class="pb-28">
+    <main class={`flex flex-col gap-6 pb-28`}>
       <form
         action=""
-        class="grid grid-cols-1 md:grid-cols-2 gap-4"
+        class={`grid grid-cols-1 gap-4 md:grid-cols-2`}
         onSubmit={(e) => {
           e.preventDefault();
           return false;
@@ -145,83 +149,77 @@ export function Calculator({ showPresets, onPresetPopulate }: Props) {
             modifyBy={0.15}
           />
         </Box>
-        <Box header="Formation Lap">
-          <div class="flex flex-col space-y-2 space-x-0 items-start">
-            <label class="space-x-2">
-              <input
-                type="radio"
-                name="formationLap"
-                value={0}
-                checked={inputValues.formationLap === 0}
-                onInput={onRadioInput}
+        <Box header="Extra Fuel">
+          <div class="flex w-full flex-col items-start space-y-2 space-x-0">
+            <div class="flex w-full flex-col justify-center">
+              <RangeInput
+                name="extraFuel"
+                value={inputValues.extraFuel}
+                step={extraFuelRangeOptions.step}
+                min={extraFuelRangeOptions.min}
+                max={extraFuelRangeOptions.max}
+                onChange={(value) => {
+                  onNumberInput(value, 'extraFuel');
+                }}
+                scaleLabels={(min, max) => {
+                  let i = 1;
+                  let current = 0;
+
+                  const labels = [
+                    { pos: 0, label: `${formatLiters(min, true)}l` },
+                    {
+                      pos: 100,
+                      label: `${formatLiters(max, true)}l`,
+                    },
+                  ];
+
+                  for (;;) {
+                    current = i * inputValues.fuelPerLap;
+
+                    if (current >= max) {
+                      break;
+                    }
+
+                    labels.push({
+                      pos:
+                        ((i * inputValues.fuelPerLap) /
+                          extraFuelRangeOptions.max) *
+                        100,
+                      label: `${formatLiters(
+                        i * inputValues.fuelPerLap,
+                        true,
+                      )}l`,
+                    });
+
+                    i++;
+                  }
+
+                  return labels;
+                }}
               />
-              <span>No lap</span>
-            </label>
-            <label class="space-x-2">
-              <input
-                type="radio"
-                name="formationLap"
-                value={0.5}
-                checked={inputValues.formationLap === 0.5}
-                onInput={onRadioInput}
-              />
-              <span>½ lap</span>
-            </label>
-            <label class="space-x-2">
-              <input
-                type="radio"
-                name="formationLap"
-                value={1}
-                checked={inputValues.formationLap === 1}
-                onInput={onRadioInput}
-              />
-              <span>1 lap</span>
-            </label>
+            </div>
           </div>
         </Box>
-        <Box header="Post Race Lap">
-          <div class="flex flex-col space-y-2 space-x-0 items-start">
-            <label class="space-x-2">
-              <input
-                type="radio"
-                name="postRaceLap"
-                value={0}
-                checked={inputValues.postRaceLap === 0}
-                onInput={onRadioInput}
-              />
-              <span>No</span>
-            </label>
-            <label class="space-x-2">
-              <input
-                type="radio"
-                name="postRaceLap"
-                value={1}
-                checked={inputValues.postRaceLap === 1}
-                onInput={onRadioInput}
-              />
-              <span>Yes</span>
-            </label>
-          </div>
-        </Box>
-        <div class="flex items-center">
-          <button class="btn btn-wide" onClick={saveAsPreset}>
-            Save Preset
-          </button>
-        </div>
       </form>
 
-      <div class="w-full fixed bottom-0 left-0 py-4 flex flex-row space-x-32 bg-[#131313f0] border-t-2 border-t-[#7e1e2038] justify-center overflow-x-scroll overflow-y-hidden">
-        <div class="flex flex-row justify-center items-center space-x-4">
-          <div class="font-bold text-5xl text-green-500 whitespace-nowrap">
+      <div class="flex items-center self-center">
+        <button class="btn btn-wide" onClick={saveAsPreset}>
+          Save Preset
+        </button>
+      </div>
+
+      <output class="fixed bottom-0 left-0 flex w-full flex-row justify-center space-x-32 overflow-y-hidden overflow-x-scroll border-t-2 border-t-[#7e1e2038] bg-[#131313f0] py-4">
+        <div class="flex flex-row items-center justify-center space-x-4">
+          <div class="whitespace-nowrap text-5xl font-bold tabular-nums text-green-500">
             {formatLiters(fuelResult)}
             <span className="font-serif font-normal text-gray-500"> l</span>
           </div>
-          <div class="text-3xl text-gray-500 leading-none">
+          <div class="text-3xl tabular-nums leading-none text-gray-500">
             [<span class="text-gray-400">{formatLiters(fuelResult, true)}</span>
             ]
           </div>
         </div>
-      </div>
+      </output>
     </main>
   );
 }
