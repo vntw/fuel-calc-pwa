@@ -1,10 +1,9 @@
 export function calc(values: FuelInputValues): number {
   const lapSeconds = values.lapTimeMinutes * 60 + values.lapTimeSeconds;
   const raceSeconds = values.raceMinutes * 60 + values.raceSeconds;
-  const laps =
-    raceSeconds / lapSeconds + values.formationLap + values.postRaceLap;
+  const laps = raceSeconds / lapSeconds;
 
-  return laps * values.fuelPerLap;
+  return laps * values.fuelPerLap + values.extraFuel;
 }
 
 export function formatLiters(l: number, exact = false): string {

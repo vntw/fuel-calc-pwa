@@ -83,7 +83,7 @@ export function NumberInput({
   };
 
   const onKeyPress = (e: KeyboardEvent) => {
-    if (e.code === 'Enter') {
+    if (!e.target || !e.key.match(/[\d+,.]/)) {
       e.preventDefault();
     }
   };
@@ -101,17 +101,17 @@ export function NumberInput({
         name={name}
         class={`${
           isDecimal ? 'w-40' : 'w-32'
-        } px-4 py-2 text-4xl border-2 border-red-700 border-opacity-25 rounded-md bg-transparent`}
+        } rounded-md border-2 border-red-700 border-opacity-25 bg-transparent px-4 py-2 text-4xl`}
         value={value.display}
         onInput={onInput}
         onBlur={onBlur}
         onKeyPress={onKeyPress}
       />
-      <div class="absolute right-[2px] top-0 grid grid-flow-row gap-[1px] py-[2px] bottom-0">
-        <button class="px-4 rounded-tr-sm bg-red-900" onClick={onInc}>
+      <div class="absolute right-[2px] top-0 bottom-0 grid grid-flow-row gap-[1px] py-[2px]">
+        <button class="rounded-tr-sm bg-red-900 px-4" onClick={onInc}>
           +
         </button>
-        <button class="px-4 rounded-br-sm bg-red-900" onClick={onDec}>
+        <button class="rounded-br-sm bg-red-900 px-4" onClick={onDec}>
           -
         </button>
       </div>

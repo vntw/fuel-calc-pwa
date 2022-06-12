@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'preact/hooks';
-import { load, save } from '../storage';
+import { KEY_PRESETS, load, save } from '../storage';
 import { formatLiters } from '../fuel';
 import { padZero } from '../util';
 import { ComponentChildren } from 'preact';
 import { Box } from './box';
+import trashIcon from './../assets/icons/trash.svg?raw';
+import { SvgIcon } from './svg-icon';
 
 type Props = {
   onPopulate: (values: FuelInputValues) => void;
@@ -13,7 +15,7 @@ export function Presets({ onPopulate }: Props) {
   const [presets, setPresets] = useState<Array<FuelInputPreset> | null>(null);
 
   useEffect(() => {
-    const data = load('fc-input-presets');
+    const data = load(KEY_PRESETS);
 
     setPresets(Array.isArray(data) ? data : []);
   }, []);
@@ -25,7 +27,7 @@ export function Presets({ onPopulate }: Props) {
 
     const newPresets = [...presets.slice(0, idx), ...presets.slice(idx + 1)];
 
-    save('fc-input-presets', newPresets);
+    save(KEY_PRESETS, newPresets);
     setPresets(newPresets);
   };
 
@@ -40,14 +42,14 @@ export function Presets({ onPopulate }: Props) {
   }
 
   const renderValue = (label: string, value: ComponentChildren) => (
-    <div class="inline-flex flex-row bg-gray-700 rounded-md">
+    <div class="inline-flex flex-row rounded-md bg-gray-700">
       <span class="px-2 py-1 uppercase">{label}</span>
-      <span class="px-2 py-1 font-bold bg-red-900 bg-opacity-75">{value}</span>
+      <span class="bg-opacity-75 bg-red-900 px-2 py-1 font-bold">{value}</span>
     </div>
   );
 
   return (
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-12 pb-16">
+    <section class="grid grid-cols-1 gap-12 pb-16 md:grid-cols-2">
       {presets.map(({ inputValues: iv, _meta }: FuelInputPreset, i: number) => (
         <Box
           key={`preset-${i}`}
@@ -62,16 +64,19 @@ export function Presets({ onPopulate }: Props) {
                 Use
               </button>
               <button
-                class="btn btn-small rounded-none bg-opacity-50"
+                class="btn btn-small bg-opacity-50 flex items-center justify-center rounded-none"
                 onClick={deletePreset(i)}
               >
-                ⤬
+                <SvgIcon
+                  raw={trashIcon}
+                  className="h-6 w-6 fill-current text-white"
+                />
               </button>
             </div>
           }
         >
           <div class="flex-col space-y-8">
-            <div class="flex flex-col space-y-2 items-start">
+            <div class="flex flex-col items-start space-y-2">
               {renderValue(
                 'Lap',
                 `${iv.lapTimeMinutes}:${padZero(iv.lapTimeSeconds)}`,
@@ -80,17 +85,20 @@ export function Presets({ onPopulate }: Props) {
                 'Race',
                 `${iv.raceMinutes}:${padZero(iv.raceSeconds)}`,
               )}
-              {renderValue('Fuel/Lap', `${iv.fuelPerLap}`)}
               {renderValue(
-                'Formation',
-                `${iv.formationLap === 0.5 ? '½' : iv.formationLap}`,
+                'Extra Fuel',
+                <>
+                  {formatLiters(iv.extraFuel, true)}
+                  <span class="pl-0.5 text-base font-normal text-gray-400">
+                    l
+                  </span>
+                </>,
               )}
-              {renderValue('Post Race', `${iv.postRaceLap}`)}
               {renderValue(
                 'Result',
                 <>
-                  {formatLiters(_meta.fuelResult)}{' '}
-                  <span class="font-normal text-base text-gray-400">
+                  {formatLiters(_meta.fuelResult)}
+                  <span class="pl-0.5 text-base font-normal text-gray-400">
                     l ({formatLiters(_meta.fuelResult, true)})
                   </span>
                 </>,

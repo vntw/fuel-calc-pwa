@@ -32,8 +32,7 @@ type FuelInputValues = {
   raceMinutes: number;
   raceSeconds: number;
   fuelPerLap: number;
-  formationLap: number;
-  postRaceLap: number;
+  extraFuel: number;
 };
 
 type FuelInputValue = {

@@ -14,12 +14,12 @@ export function App() {
   return (
     <div class="flex flex-col items-center text-gray-300">
       <div class="container flex flex-col">
-        <header class="flex flex-row justify-between py-4 items-center">
-          <h1 class="text-2xl uppercase cursor-default">Fuel Calculator</h1>
+        <header class="flex flex-row items-center justify-between py-4">
+          <h1 class="cursor-default text-2xl uppercase">Fuel Calculator</h1>
           <button onClick={toggleShowPresets}>
             <SvgIcon
               raw={showPresets ? fuelIcon : historyIcon}
-              className="flex w-8 h-8 fill-current"
+              className="flex h-8 w-8 fill-current"
             />
             <span class="sr-only">
               {showPresets ? 'Show Calculator' : 'Show Presets'}
