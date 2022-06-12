@@ -40,14 +40,14 @@ export function Presets({ onPopulate }: Props) {
   }
 
   const renderValue = (label: string, value: ComponentChildren) => (
-    <div class="inline-flex flex-row bg-gray-700 rounded-md">
+    <div class="inline-flex flex-row rounded-md bg-gray-700">
       <span class="px-2 py-1 uppercase">{label}</span>
-      <span class="px-2 py-1 font-bold bg-red-900 bg-opacity-75">{value}</span>
+      <span class="bg-opacity-75 bg-red-900 px-2 py-1 font-bold">{value}</span>
     </div>
   );
 
   return (
-    <section class="grid grid-cols-1 md:grid-cols-2 gap-12 pb-16">
+    <section class="grid grid-cols-1 gap-12 pb-16 md:grid-cols-2">
       {presets.map(({ inputValues: iv, _meta }: FuelInputPreset, i: number) => (
         <Box
           key={`preset-${i}`}
@@ -62,7 +62,7 @@ export function Presets({ onPopulate }: Props) {
                 Use
               </button>
               <button
-                class="btn btn-small rounded-none bg-opacity-50"
+                class="btn btn-small bg-opacity-50 flex items-center justify-center rounded-none"
                 onClick={deletePreset(i)}
               >
                 ⤬
@@ -71,7 +71,7 @@ export function Presets({ onPopulate }: Props) {
           }
         >
           <div class="flex-col space-y-8">
-            <div class="flex flex-col space-y-2 items-start">
+            <div class="flex flex-col items-start space-y-2">
               {renderValue(
                 'Lap',
                 `${iv.lapTimeMinutes}:${padZero(iv.lapTimeSeconds)}`,
