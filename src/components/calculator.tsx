@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'preact/hooks';
-import { load, save } from '../storage';
+import { KEY_CURRENT_VALUES, KEY_PRESETS, load, save } from '../storage';
 import { calc, formatLiters } from '../fuel';
 import { NumberInput } from './number-input';
 import { Presets } from './presets';
@@ -24,7 +24,7 @@ export function Calculator({ showPresets, onPresetPopulate }: Props) {
   });
 
   useEffect(() => {
-    const data = load('fc-input-values');
+    const data = load(KEY_CURRENT_VALUES);
 
     if (data) {
       setInputValues(data);
@@ -38,7 +38,7 @@ export function Calculator({ showPresets, onPresetPopulate }: Props) {
       return;
     }
     setFuelResult(calc(inputValues));
-    save('fc-input-values', inputValues);
+    save(KEY_CURRENT_VALUES, inputValues);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputValues]);
 
@@ -56,7 +56,7 @@ export function Calculator({ showPresets, onPresetPopulate }: Props) {
   };
 
   const saveAsPreset = () => {
-    const currentPresets = load('fc-input-presets');
+    const currentPresets = load(KEY_PRESETS);
     const newPresets = Array.isArray(currentPresets) ? currentPresets : [];
     newPresets.push({
       inputValues,
@@ -66,7 +66,7 @@ export function Calculator({ showPresets, onPresetPopulate }: Props) {
       },
     });
 
-    save('fc-input-presets', newPresets);
+    save(KEY_PRESETS, newPresets);
   };
 
   if (!loaded) {

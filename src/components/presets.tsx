@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'preact/hooks';
-import { load, save } from '../storage';
+import { KEY_PRESETS, load, save } from '../storage';
 import { formatLiters } from '../fuel';
 import { padZero } from '../util';
 import { ComponentChildren } from 'preact';
@@ -13,7 +13,7 @@ export function Presets({ onPopulate }: Props) {
   const [presets, setPresets] = useState<Array<FuelInputPreset> | null>(null);
 
   useEffect(() => {
-    const data = load('fc-input-presets');
+    const data = load(KEY_PRESETS);
 
     setPresets(Array.isArray(data) ? data : []);
   }, []);
