@@ -3,3 +3,8 @@ export const padZero = (number: number): string =>
 
 export const clamp = (num: number, min: number, max: number) =>
   Math.min(Math.max(num, min), max);
+
+export const formatSecondsToDuration = (seconds: number) =>
+  `${Math.floor(seconds / 60)}:${padZero(seconds % 60)}`;
+
+export const minutesToSeconds = (min: number, sec: number) => min * 60 + sec;

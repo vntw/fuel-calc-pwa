@@ -1,6 +1,16 @@
+import { minutesToSeconds } from './util';
+
 export function calc(values: FuelInputValues): number {
-  const lapSeconds = values.lapTimeMinutes * 60 + values.lapTimeSeconds;
-  const raceSeconds = values.raceMinutes * 60 + values.raceSeconds;
+  const lapSeconds = minutesToSeconds(
+    values.lapTimeMinutes,
+    values.lapTimeSeconds,
+  );
+  const raceSeconds = minutesToSeconds(values.raceMinutes, values.raceSeconds);
+
+  if (lapSeconds <= 0 || raceSeconds <= 0 || values.fuelPerLap <= 0) {
+    return 0;
+  }
+
   const laps = raceSeconds / lapSeconds;
 
   return laps * values.fuelPerLap + values.extraFuel;

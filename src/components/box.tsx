@@ -2,13 +2,23 @@ import { ComponentChildren } from 'preact';
 
 type Props = {
   header?: ComponentChildren;
-  children: ComponentChildren;
   footer?: ComponentChildren;
+  secondary?: boolean;
+  children: ComponentChildren;
 };
 
-export function Box({ children, header = null, footer = null }: Props) {
+export function Box({
+  children,
+  secondary = false,
+  header = null,
+  footer = null,
+}: Props) {
   return (
-    <div class="flex flex-col border-t-3 border-t-red-900">
+    <div
+      class={`flex flex-col border-t-3 ${
+        secondary ? 'border-t-zinc-800' : 'border-t-red-900'
+      }`}
+    >
       {header && (
         <div class="bg-black px-4 py-2 text-center text-2xl font-bold uppercase">
           {header}

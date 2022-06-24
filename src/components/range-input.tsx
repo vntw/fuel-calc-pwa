@@ -8,13 +8,15 @@ type Props = {
   max: number;
   step: number;
   onChange: (value: number) => void;
+  renderValue?: (value: number) => JSX.Element;
+  mobileWrap?: boolean;
   scaleLabels?: (
     min: number,
     max: number,
   ) => Array<{ pos: number; label: string }>;
 };
 
-const scaleLabel = (pos: number, label: string) => (
+const renderScaleLabel = (pos: number, label: string) => (
   <span
     className="absolute top-0 -translate-x-1/2 after:absolute after:-top-1 after:left-1/2 after:inline-block after:h-[6px] after:w-[1px] after:bg-white/50 after:content-['']"
     style={{
@@ -32,6 +34,8 @@ export function RangeInput({
   max,
   step,
   onChange,
+  mobileWrap = false,
+  renderValue,
   scaleLabels,
 }: Props) {
   const handleValueChange = ({
@@ -52,12 +56,22 @@ export function RangeInput({
   const labels = scaleLabels ? scaleLabels(min, max) : [];
 
   return (
-    <div class="relative flex w-full flex-row items-center gap-6">
+    <div
+      class={`relative flex ${
+        mobileWrap ? 'flex-col px-4 pb-8 md:flex-row md:p-0' : 'flex-row'
+      } w-full items-center gap-6`}
+    >
       <output class="relative flex select-none whitespace-nowrap text-center text-4xl">
-        <span class="invisible">99.99l</span>
-        <span className="absolute inset-0 tabular-nums">
-          {value.toFixed(2)}l
-        </span>
+        {renderValue ? (
+          renderValue(value)
+        ) : (
+          <>
+            <span class="invisible">99.99l</span>
+            <span class="absolute inset-0 tabular-nums">
+              {value.toFixed(2)}l
+            </span>
+          </>
+        )}
       </output>
       <div class="w-full space-y-2">
         <input
@@ -77,7 +91,7 @@ export function RangeInput({
         {labels.length > 0 && (
           <ul class="relative block text-sm">
             {labels.map(({ pos, label }) => (
-              <li key={pos}>{scaleLabel(pos, label)}</li>
+              <li key={pos}>{renderScaleLabel(pos, label)}</li>
             ))}
           </ul>
         )}
