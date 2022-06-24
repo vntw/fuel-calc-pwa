@@ -5,6 +5,7 @@ import { NumberInput } from './number-input';
 import { Presets } from './presets';
 import { Box } from './box';
 import { RangeInput } from './range-input';
+import { formatSecondsToDuration, minutesToSeconds, padZero } from '../util';
 
 type Props = {
   showPresets: boolean;
@@ -22,12 +23,12 @@ export function Calculator({ showPresets, onPresetPopulate }: Props) {
     fuelPerLap: 3.5,
     extraFuel: 0,
   });
-
   const [extraFuelRangeOptions, setExtraFuelRangeOptions] = useState({
     step: 0.25,
     min: 0,
     max: 10,
   });
+  const [pitStopAt, setPitStopAt] = useState(0);
 
   useEffect(() => {
     const data = load(KEY_CURRENT_VALUES);
@@ -162,9 +163,6 @@ export function Calculator({ showPresets, onPresetPopulate }: Props) {
                   onNumberInput(value, 'extraFuel');
                 }}
                 scaleLabels={(min, max) => {
-                  let i = 1;
-                  let current = 0;
-
                   const labels = [
                     { pos: 0, label: `${formatLiters(min, true)}l` },
                     {
@@ -173,25 +171,18 @@ export function Calculator({ showPresets, onPresetPopulate }: Props) {
                     },
                   ];
 
-                  for (;;) {
-                    current = i * inputValues.fuelPerLap;
+                  const fpl =
+                    inputValues.fuelPerLap > 0 ? inputValues.fuelPerLap : 1;
 
-                    if (current >= max) {
-                      break;
-                    }
-
+                  for (
+                    let i = 1;
+                    i <= Math.max(Math.floor(max / fpl) - 1, 1);
+                    i++
+                  ) {
                     labels.push({
-                      pos:
-                        ((i * inputValues.fuelPerLap) /
-                          extraFuelRangeOptions.max) *
-                        100,
-                      label: `${formatLiters(
-                        i * inputValues.fuelPerLap,
-                        true,
-                      )}l`,
+                      pos: ((i * fpl) / max) * 100,
+                      label: `${formatLiters(i * fpl, true)}l`,
                     });
-
-                    i++;
                   }
 
                   return labels;
@@ -207,6 +198,77 @@ export function Calculator({ showPresets, onPresetPopulate }: Props) {
           Save Preset
         </button>
       </div>
+
+      <Box header="Pit Stop Refuel" secondary>
+        <RangeInput
+          mobileWrap
+          name="pitStopAt"
+          value={pitStopAt}
+          step={1}
+          min={0}
+          max={minutesToSeconds(
+            inputValues.raceMinutes,
+            inputValues.raceSeconds,
+          )}
+          onChange={(value) => {
+            setPitStopAt(value);
+          }}
+          renderValue={(value) => {
+            const raceSeconds = minutesToSeconds(
+              inputValues.raceMinutes,
+              inputValues.raceSeconds,
+            );
+            const before = (value / raceSeconds) * fuelResult;
+            const after = fuelResult - before;
+
+            return (
+              <div class="grid w-max grid-cols-2 gap-y-0.5 gap-x-4 text-left text-base tabular-nums text-gray-400">
+                <div class="text-lg text-gray-50">Race Time</div>
+                <div class="text-left text-lg text-gray-50">
+                  {formatSecondsToDuration(value)}
+                </div>
+                <div>Previous</div>
+                <div class="text-left">{formatLiters(before, true)}l</div>
+                <div class="text-xl font-bold text-gray-50">Refuel</div>
+                <div class="text-left text-xl font-bold text-green-500">
+                  {formatLiters(after, true)}l
+                </div>
+              </div>
+            );
+          }}
+          scaleLabels={() => {
+            const raceSeconds = minutesToSeconds(
+              inputValues.raceMinutes,
+              inputValues.raceSeconds,
+            );
+            const prog25 = raceSeconds * 0.25;
+            const prog50 = raceSeconds * 0.5;
+            const prog75 = raceSeconds * 0.75;
+
+            return [
+              { pos: 0, label: '0:00' },
+              {
+                pos: 25,
+                label: formatSecondsToDuration(prog25),
+              },
+              {
+                pos: 50,
+                label: formatSecondsToDuration(prog50),
+              },
+              {
+                pos: 75,
+                label: formatSecondsToDuration(prog75),
+              },
+              {
+                pos: 100,
+                label: `${inputValues.raceMinutes}:${padZero(
+                  inputValues.raceSeconds,
+                )}`,
+              },
+            ];
+          }}
+        />
+      </Box>
 
       <output class="fixed bottom-0 left-0 flex w-full flex-row justify-center space-x-32 overflow-y-hidden overflow-x-scroll border-t-2 border-t-[#7e1e2038] bg-[#131313f0] py-4">
         <div class="flex flex-row items-center justify-center space-x-4">

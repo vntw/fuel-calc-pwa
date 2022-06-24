@@ -12,7 +12,7 @@ export function App() {
   };
 
   return (
-    <div class="flex flex-col items-center text-gray-300">
+    <div class="flex flex-col items-center text-gray-200">
       <div class="container flex flex-col">
         <header class="flex flex-row items-center justify-between py-4">
           <h1 class="cursor-default text-2xl uppercase">Fuel Calculator</h1>
