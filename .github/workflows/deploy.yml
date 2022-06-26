@@ -3,7 +3,7 @@ name: deploy
 on:
   push:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, synchronize, labeled]
 
 jobs:
   deploy:
