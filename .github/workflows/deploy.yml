@@ -1,0 +1,38 @@
+name: deploy
+
+on:
+  push:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/master' || (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'deploy'))
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: yarn install --frozen-lockfile
+      - run: yarn build
+      - name: set deploy prod flag
+        id: set_vercel_args
+        run: |
+          if [ "$COMMIT_REF" == 'refs/heads/master' ]
+          then
+              echo "::set-output name=args::--prod"
+          else
+              echo "::set-output name=args::"
+          fi
+        env:
+          COMMIT_REF: ${{ github.ref }}
+      - run: ls -lah .; ls -lah dist
+      - uses: amondnet/vercel-action@v25
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+          vercel-args: ${{ steps.set_vercel_args.outputs.args }}
+          working-directory: dist
