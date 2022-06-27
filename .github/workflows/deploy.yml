@@ -1,13 +1,19 @@
 name: deploy
 
 on:
-  push:
+  workflow_dispatch:
+    inputs:
+      prod_env:
+        description: 'Production'
+        required: false
+        default: true
+        type: boolean
   pull_request:
     types: [opened, synchronize, labeled]
 
 jobs:
   deploy:
-    if: github.ref == 'refs/heads/master' || (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'deploy'))
+    if: github.event_name == 'workflow_dispatch' || (github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'deploy'))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -19,15 +25,14 @@ jobs:
       - name: set deploy prod flag
         id: set_vercel_args
         run: |
-          if [ "$COMMIT_REF" == 'refs/heads/master' ]
+          if [ "$PROD_ENV" == 'true' ]
           then
               echo "::set-output name=args::--prod"
           else
               echo "::set-output name=args::"
           fi
         env:
-          COMMIT_REF: ${{ github.ref }}
-      - run: ls -lah .; ls -lah dist
+          PROD_ENV: ${{ inputs.prod_env }}
       - uses: amondnet/vercel-action@v25
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
