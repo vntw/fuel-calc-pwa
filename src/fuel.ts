@@ -11,7 +11,7 @@ export function calc(values: FuelInputValues): number {
     return 0;
   }
 
-  const laps = raceSeconds / lapSeconds;
+  const laps = Math.ceil(raceSeconds / lapSeconds);
 
   return laps * values.fuelPerLap + values.extraFuel;
 }
