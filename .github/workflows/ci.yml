@@ -3,7 +3,7 @@ name: ci
 on: push
 
 jobs:
-  lint:
+  lint-app:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -12,6 +12,15 @@ jobs:
           node-version: 18
       - run: yarn install --frozen-lockfile
       - run: yarn lint
+
+  lint-renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npx --package renovate -c renovate-config-validator
 
   build:
     runs-on: ubuntu-latest
