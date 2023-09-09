@@ -4,7 +4,7 @@
   "version": "2.0.0",
   "dependencies": {
     "joi": "17.10.1",
-    "preact": "10.11.3"
+    "preact": "10.17.1"
   },
   "devDependencies": {
     "@preact/preset-vite": "2.5.0",
