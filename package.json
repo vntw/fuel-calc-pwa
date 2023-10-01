@@ -3,7 +3,7 @@
   "license": "MIT",
   "version": "2.0.0",
   "dependencies": {
-    "joi": "17.10.1",
+    "joi": "17.10.2",
     "preact": "10.17.1"
   },
   "devDependencies": {
