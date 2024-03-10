@@ -23,8 +23,8 @@ export function NumberInput({
     display: isDecimal
       ? defaultValue.toFixed(2)
       : isSeconds
-      ? padZero(defaultValue)
-      : defaultValue.toString(),
+        ? padZero(defaultValue)
+        : defaultValue.toString(),
   });
 
   const handleValueChange = (valueDisplay: string, fromSingle = false) => {
