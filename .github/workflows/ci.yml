@@ -7,27 +7,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-      - run: yarn install --frozen-lockfile
-      - run: yarn lint
+      - uses: ./.github/actions/setup-env
+      - run: pnpm run lint
 
   lint-renovate:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
+      - uses: ./.github/actions/setup-env
       - run: npx --package renovate -c renovate-config-validator
 
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 18
-      - run: yarn install --frozen-lockfile
-      - run: yarn build
+      - uses: ./.github/actions/setup-env
+      - run: pnpm run build

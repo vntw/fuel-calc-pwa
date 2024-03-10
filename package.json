@@ -2,12 +2,13 @@
   "name": "fuel-calc-pwa",
   "license": "MIT",
   "version": "2.0.0",
+  "packageManager": "pnpm@8.15.4",
   "dependencies": {
     "joi": "17.11.1",
     "preact": "10.18.2"
   },
   "devDependencies": {
-    "@preact/preset-vite": "2.7.0",
+    "@preact/preset-vite": "2.8.1",
     "@types/node": "^20.6.0",
     "@typescript-eslint/eslint-plugin": "6.9.1",
     "@typescript-eslint/parser": "6.9.1",
@@ -15,18 +16,19 @@
     "eslint": "8.53.0",
     "eslint-config-preact": "1.3.0",
     "postcss": "8.4.35",
-    "prettier": "3.0.3",
+    "prettier": "3.2.5",
     "prettier-plugin-tailwindcss": "0.5.11",
     "tailwindcss": "3.3.7",
     "typescript": "5.2.2",
-    "vite": "4.5.2",
-    "vite-plugin-pwa": "0.16.7"
+    "vite": "5.1.5",
+    "vite-plugin-pwa": "0.19.2",
+    "workbox-window": "^7.0.0"
   },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint": "prettier --ignore-path .gitignore --check . && eslint 'src/**/*.{js,jsx,ts,tsx,html}' && tsc --noEmit",
-    "format": "prettier --ignore-path .gitignore --write . && eslint 'src/**/*.{js,jsx,ts,tsx,html}' --fix"
+    "lint": "prettier --check . && eslint 'src/**/*.{js,jsx,ts,tsx,html}' && tsc --noEmit",
+    "format": "prettier --write . && eslint 'src/**/*.{js,jsx,ts,tsx,html}' --fix"
   }
 }
