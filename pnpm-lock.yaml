@@ -15,7 +15,7 @@ dependencies:
 devDependencies:
   '@preact/preset-vite':
     specifier: 2.8.3
-    version: 2.8.3(@babel/core@7.24.6)(preact@10.20.2)(vite@5.2.8)
+    version: 2.8.3(@babel/core@7.24.6)(preact@10.20.2)(vite@5.2.14)
   '@types/node':
     specifier: ^20.12.3
     version: 20.12.14
@@ -50,11 +50,11 @@ devDependencies:
     specifier: 5.4.3
     version: 5.4.3
   vite:
-    specifier: 5.2.8
-    version: 5.2.8(@types/node@20.12.14)
+    specifier: 5.2.14
+    version: 5.2.14(@types/node@20.12.14)
   vite-plugin-pwa:
     specifier: 0.19.7
-    version: 0.19.7(vite@5.2.8)(workbox-build@7.1.1)(workbox-window@7.0.0)
+    version: 0.19.7(vite@5.2.14)(workbox-build@7.1.1)(workbox-window@7.0.0)
   workbox-window:
     specifier: ^7.0.0
     version: 7.0.0
@@ -1821,7 +1821,7 @@ packages:
     dev: true
     optional: true
 
-  /@preact/preset-vite@2.8.3(@babel/core@7.24.6)(preact@10.20.2)(vite@5.2.8):
+  /@preact/preset-vite@2.8.3(@babel/core@7.24.6)(preact@10.20.2)(vite@5.2.14):
     resolution: {integrity: sha512-IT4+IV3D4lIyoDrp4FUfx4dT2yW/5KIl2MXAsqqItGTbz1xUhtSyP9nS2kLXNnhLG4I2Nku/X+vKFMmRG+oMDA==}
     peerDependencies:
       '@babel/core': 7.x
@@ -1831,7 +1831,7 @@ packages:
       '@babel/core': 7.24.6
       '@babel/plugin-transform-react-jsx': 7.23.4(@babel/core@7.24.6)
       '@babel/plugin-transform-react-jsx-development': 7.22.5(@babel/core@7.24.6)
-      '@prefresh/vite': 2.4.5(preact@10.20.2)(vite@5.2.8)
+      '@prefresh/vite': 2.4.5(preact@10.20.2)(vite@5.2.14)
       '@rollup/pluginutils': 4.2.1
       babel-plugin-transform-hook-names: 1.0.2(@babel/core@7.24.6)
       debug: 4.3.5
@@ -1841,7 +1841,7 @@ packages:
       resolve: 1.22.8
       source-map: 0.7.4
       stack-trace: 1.0.0-pre2
-      vite: 5.2.8(@types/node@20.12.14)
+      vite: 5.2.14(@types/node@20.12.14)
     transitivePeerDependencies:
       - preact
       - supports-color
@@ -1863,7 +1863,7 @@ packages:
     resolution: {integrity: sha512-KtC/fZw+oqtwOLUFM9UtiitB0JsVX0zLKNyRTA332sqREqSALIIQQxdUCS1P3xR/jT1e2e8/5rwH6gdcMLEmsQ==}
     dev: true
 
-  /@prefresh/vite@2.4.5(preact@10.20.2)(vite@5.2.8):
+  /@prefresh/vite@2.4.5(preact@10.20.2)(vite@5.2.14):
     resolution: {integrity: sha512-iForDVJ2M8gQYnm5pHumvTEJjGGc7YNYC0GVKnHFL+GvFfKHfH9Rpq67nUAzNbjuLEpqEOUuQVQajMazWu2ZNQ==}
     peerDependencies:
       preact: ^10.4.0
@@ -1875,7 +1875,7 @@ packages:
       '@prefresh/utils': 1.2.0
       '@rollup/pluginutils': 4.2.1
       preact: 10.20.2
-      vite: 5.2.8(@types/node@20.12.14)
+      vite: 5.2.14(@types/node@20.12.14)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -5361,7 +5361,7 @@ packages:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
 
-  /vite-plugin-pwa@0.19.7(vite@5.2.8)(workbox-build@7.1.1)(workbox-window@7.0.0):
+  /vite-plugin-pwa@0.19.7(vite@5.2.14)(workbox-build@7.1.1)(workbox-window@7.0.0):
     resolution: {integrity: sha512-18TECxoGPQE7tVZzKxbf5Icrl5688n1JGMPSgGotTsh89vLDxevY7ICfD3CFVfonZXh8ckuyJXg0NXE5+FAl2A==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
@@ -5376,15 +5376,15 @@ packages:
       debug: 4.3.4
       fast-glob: 3.3.2
       pretty-bytes: 6.1.1
-      vite: 5.2.8(@types/node@20.12.14)
+      vite: 5.2.14(@types/node@20.12.14)
       workbox-build: 7.1.1
       workbox-window: 7.0.0
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /vite@5.2.8(@types/node@20.12.14):
-    resolution: {integrity: sha512-OyZR+c1CE8yeHw5V5t59aXsUPPVTHMDjEZz8MgguLL/Q7NblxhZUlTu9xSPqlsUO/y+X7dlU05jdhvyycD55DA==}
+  /vite@5.2.14(@types/node@20.12.14):
+    resolution: {integrity: sha512-TFQLuwWLPms+NBNlh0D9LZQ+HXW471COABxw/9TEUBrjuHMo9BrYBPrN/SYAwIuVL+rLerycxiLT41t4f5MZpA==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
