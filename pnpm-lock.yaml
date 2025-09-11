@@ -15,7 +15,7 @@ dependencies:
 devDependencies:
   '@preact/preset-vite':
     specifier: 2.10.1
-    version: 2.10.1(@babel/core@7.27.4)(preact@10.20.2)(vite@5.4.19)
+    version: 2.10.1(@babel/core@7.27.4)(preact@10.20.2)(vite@5.4.20)
   '@types/node':
     specifier: ^20.12.3
     version: 20.17.57
@@ -50,11 +50,11 @@ devDependencies:
     specifier: 5.4.5
     version: 5.4.5
   vite:
-    specifier: 5.4.19
-    version: 5.4.19(@types/node@20.17.57)
+    specifier: 5.4.20
+    version: 5.4.20(@types/node@20.17.57)
   vite-plugin-pwa:
     specifier: 0.19.8
-    version: 0.19.8(vite@5.4.19)(workbox-build@7.3.0)(workbox-window@7.0.0)
+    version: 0.19.8(vite@5.4.20)(workbox-build@7.3.0)(workbox-window@7.0.0)
   workbox-window:
     specifier: ^7.0.0
     version: 7.0.0
@@ -1905,7 +1905,7 @@ packages:
     dev: true
     optional: true
 
-  /@preact/preset-vite@2.10.1(@babel/core@7.27.4)(preact@10.20.2)(vite@5.4.19):
+  /@preact/preset-vite@2.10.1(@babel/core@7.27.4)(preact@10.20.2)(vite@5.4.20):
     resolution: {integrity: sha512-59lyGBXNfZIr5OOuBUB4/IB8AqF/ULbvYnyItgK/2BJnsGJqaeaJobRVtMp1129obHQuj8oZ/dVxB9inmH8Xig==}
     peerDependencies:
       '@babel/core': 7.x
@@ -1914,12 +1914,12 @@ packages:
       '@babel/core': 7.27.4
       '@babel/plugin-transform-react-jsx': 7.23.4(@babel/core@7.27.4)
       '@babel/plugin-transform-react-jsx-development': 7.22.5(@babel/core@7.27.4)
-      '@prefresh/vite': 2.4.5(preact@10.20.2)(vite@5.4.19)
+      '@prefresh/vite': 2.4.5(preact@10.20.2)(vite@5.4.20)
       '@rollup/pluginutils': 4.2.1
       babel-plugin-transform-hook-names: 1.0.2(@babel/core@7.27.4)
       debug: 4.4.0
       kolorist: 1.8.0
-      vite: 5.4.19(@types/node@20.17.57)
+      vite: 5.4.20(@types/node@20.17.57)
       vite-prerender-plugin: 0.5.3
     transitivePeerDependencies:
       - preact
@@ -1942,7 +1942,7 @@ packages:
     resolution: {integrity: sha512-KtC/fZw+oqtwOLUFM9UtiitB0JsVX0zLKNyRTA332sqREqSALIIQQxdUCS1P3xR/jT1e2e8/5rwH6gdcMLEmsQ==}
     dev: true
 
-  /@prefresh/vite@2.4.5(preact@10.20.2)(vite@5.4.19):
+  /@prefresh/vite@2.4.5(preact@10.20.2)(vite@5.4.20):
     resolution: {integrity: sha512-iForDVJ2M8gQYnm5pHumvTEJjGGc7YNYC0GVKnHFL+GvFfKHfH9Rpq67nUAzNbjuLEpqEOUuQVQajMazWu2ZNQ==}
     peerDependencies:
       preact: ^10.4.0
@@ -1954,7 +1954,7 @@ packages:
       '@prefresh/utils': 1.2.0
       '@rollup/pluginutils': 4.2.1
       preact: 10.20.2
-      vite: 5.4.19(@types/node@20.17.57)
+      vite: 5.4.20(@types/node@20.17.57)
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -5485,6 +5485,7 @@ packages:
   /source-map@0.8.0-beta.0:
     resolution: {integrity: sha512-2ymg6oRBpebeZi9UUNsgQ89bhx01TcTkmNTGnNO88imTmbSgy4nfujrgVEFKWpMTEGA11EDkTt7mqObTPdigIA==}
     engines: {node: '>= 8'}
+    deprecated: The work that was done in this beta branch won't be included in future versions
     dependencies:
       whatwg-url: 7.1.0
     dev: true
@@ -6012,7 +6013,7 @@ packages:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
     dev: true
 
-  /vite-plugin-pwa@0.19.8(vite@5.4.19)(workbox-build@7.3.0)(workbox-window@7.0.0):
+  /vite-plugin-pwa@0.19.8(vite@5.4.20)(workbox-build@7.3.0)(workbox-window@7.0.0):
     resolution: {integrity: sha512-e1oK0dfhzhDhY3VBuML6c0h8Xfx6EkOVYqolj7g+u8eRfdauZe5RLteCIA/c5gH0CBQ0CNFAuv/AFTx4Z7IXTw==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
@@ -6027,7 +6028,7 @@ packages:
       debug: 4.3.5
       fast-glob: 3.3.2
       pretty-bytes: 6.1.1
-      vite: 5.4.19(@types/node@20.17.57)
+      vite: 5.4.20(@types/node@20.17.57)
       workbox-build: 7.3.0
       workbox-window: 7.0.0
     transitivePeerDependencies:
@@ -6044,8 +6045,8 @@ packages:
       stack-trace: 1.0.0-pre2
     dev: true
 
-  /vite@5.4.19(@types/node@20.17.57):
-    resolution: {integrity: sha512-qO3aKv3HoQC8QKiNSTuUM1l9o/XX3+c+VTgLHbJWHZGeTPVAg2XwazI9UWzoxjIJCGCV2zU60uqMzjeLZuULqA==}
+  /vite@5.4.20(@types/node@20.17.57):
+    resolution: {integrity: sha512-j3lYzGC3P+B5Yfy/pfKNgVEg4+UtcIJcVRt2cDjIOmhLourAqPqf8P7acgxeiSgUB7E3p2P8/3gNIgDLpwzs4g==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
