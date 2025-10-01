@@ -9,7 +9,7 @@
     "preact": "10.20.2"
   },
   "devDependencies": {
-    "@preact/preset-vite": "2.10.1",
+    "@preact/preset-vite": "2.10.2",
     "@types/node": "^20.12.3",
     "@typescript-eslint/eslint-plugin": "7.5.0",
     "@typescript-eslint/parser": "7.5.0",
