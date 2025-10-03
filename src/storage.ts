@@ -39,7 +39,7 @@ export function load(key: KEYS): any {
 
   try {
     return validateSchema(key, JSON.parse(d));
-  } catch (e) {
+  } catch {
     return null;
   }
 }
