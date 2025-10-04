@@ -1,12 +1,17 @@
 runs:
   using: 'composite'
   steps:
+    - uses: pnpm/action-setup@v4
+      name: Install pnpm
+      with:
+        run_install: false
+
     - name: Install Node.js
       uses: actions/setup-node@v5
       with:
         node-version: 24
+        cache: 'pnpm'
 
-    - uses: pnpm/action-setup@v4
-      name: Install pnpm
-      with:
-        run_install: true
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install
