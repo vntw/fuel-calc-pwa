@@ -30,7 +30,7 @@ jobs:
           fi
         env:
           PROD_ENV: ${{ inputs.prod_env }}
-      - uses: amondnet/vercel-action@v25
+      - uses: amondnet/vercel-action@v42
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
