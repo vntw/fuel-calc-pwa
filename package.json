@@ -3,7 +3,7 @@
   "license": "MIT",
   "version": "2.0.0",
   "type": "module",
-  "packageManager": "pnpm@9.15.9",
+  "packageManager": "pnpm@11.15.1",
   "dependencies": {
     "joi": "18.2.3",
     "preact": "10.29.2"
