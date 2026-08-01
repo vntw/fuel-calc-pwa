@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@preact/preset-vite": "2.10.5",
+    "@preact/preset-vite": "2.10.6",
     "@types/node": "^26.1.1",
     "autoprefixer": "^10.5.4",
     "eslint": "^10.7.0",
