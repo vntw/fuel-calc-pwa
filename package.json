@@ -5,7 +5,7 @@
   "type": "module",
   "packageManager": "pnpm@11.15.1",
   "dependencies": {
-    "joi": "18.2.3",
+    "joi": "18.2.5",
     "preact": "10.29.7"
   },
   "devDependencies": {
